@@ -4,8 +4,8 @@ import tensorflow_datasets as tfds
 
 class myCallback(tf.keras.callbacks.Callback):
   def on_epoch_end(self, epoch, logs={}):
-    if(logs.get('accuracy') >= 0.5): # Experiment with changing this value
-      print("\nReached 60% accuracy so cancelling training!")
+    if(logs.get('accuracy') >= 0.9): # Experiment with changing this value
+      print("\nReached 90% accuracy so cancelling training!")
       self.model.stop_training = True
 
 callbacks = myCallback()
@@ -45,3 +45,4 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               metrics=["accuracy"])
 
 model.fit(train_ds, epochs=25, callbacks=[callbacks])
+model.save("saved_models/citrus")
