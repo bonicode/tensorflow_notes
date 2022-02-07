@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+# =========== Load datasets ============= #
 (ds_train, ds_test), ds_info = tfds.load(
     "imdb_reviews",
     split=["train", "test"],
@@ -51,6 +52,7 @@ training_padded = pad_sequences(
 testing_sequences = tokenizer.texts_to_sequences(testing_sentences)
 testing_padded = pad_sequences(testing_sequences, maxlen=max_length)
 
+# ============ Create model ==================#
 model = tf.keras.Sequential(
     [
         tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
